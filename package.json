@@ -9,6 +9,7 @@
     "node": "8"
   },
   "scripts": {
+    "emulators": "firebase emulators:start",
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
@@ -28,16 +29,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@firebase/app": "^0.6.0",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/graphql": "7.0.10",
     "@nestjs/platform-express": "^6.7.2",
     "apollo-server-express": "2.11.0",
-    "graphql": "14.6.0",
-    "graphql-tools": "4.0.7",
     "firebase-admin": "^8.10.0",
     "firebase-firestorm": "^2.0.5",
     "firebase-functions": "^3.3.0",
+    "graphql": "14.6.0",
+    "graphql-tools": "4.0.7",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
