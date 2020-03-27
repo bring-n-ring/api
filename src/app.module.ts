@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AddressModule } from './address/address.module';
 import { AppController } from './app.controller';
-import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 
 @Module({
@@ -11,8 +11,9 @@ import { AppService } from './app.service';
       playground: true,
       introspection: true,
     }),
+    AddressModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AppResolver],
+  providers: [AppService],
 })
 export class AppModule {}
