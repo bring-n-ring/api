@@ -8,6 +8,8 @@ import { AppService } from './app.service';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: true,
+      playground: true,
+      introspection: true,
     }),
   ],
   controllers: [AppController],
