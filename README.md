@@ -9,5 +9,6 @@
 
 ## Local debugging with emulators
 
-1. As emulators don't have hot reload, run `npm run start:debug`
-2. In a separate console, start emulators with `npm run emulators`
+1. Make sure you have Java & Nodejs installed.
+2. As emulators don't have hot reload, run `npm run start:debug`
+3. In a separate console, start emulators with `npm run emulators`
