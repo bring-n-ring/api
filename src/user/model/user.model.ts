@@ -37,12 +37,12 @@ export class User extends BaseModel {
   @field()
   totalBringALings: number;
 
-  @Field(type => Address)
+  @Field(type => [Address])
   @field()
   @subCollection({
     name: 'address',
     entity: Address,
   })
-  address: ICollection<Address>;
+  address: [ICollection<Address>];
 
 }
