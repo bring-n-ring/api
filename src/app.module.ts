@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AddressModule } from './address/address.module';
+import { UserModule } from './user/user.module'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DateTimeScalar } from './core/scalar/date-time.scalar';
@@ -15,6 +16,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
     }),
     AddressModule,
     ShoppingListModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateTimeScalar],
