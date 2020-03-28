@@ -43,6 +43,6 @@ export class User extends BaseModel {
     name: 'address',
     entity: Address,
   })
-  address: [ICollection<Address>];
+  address: ICollection<Address>[];
 
 }

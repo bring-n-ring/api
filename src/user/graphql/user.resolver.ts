@@ -15,9 +15,7 @@ export class UserResolver {
 
     @ResolveField('address', returns => [Address])
     async address(@Parent() user: User) {
-      //const { id } = user;
       return this.userService.address(user)
-
     }
 
     @Mutation(returns => User)
