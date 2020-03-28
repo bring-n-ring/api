@@ -25,7 +25,7 @@ export class CreateUserInput {
   @Field(type => Int, { nullable: true })
   totalBringALings?: number;
 
-  @Field(type => CreateAddressInput)
-  address: Address;
+  @Field(type => [CreateAddressInput])
+  addresses: [Address];
 
 }

@@ -1,5 +1,4 @@
 import { Field, Float, InputType } from '@nestjs/graphql';
-import { DateTime } from 'luxon';
 
 @InputType()
 export class CreateShoppingListInput {
@@ -14,4 +13,7 @@ export class CreateShoppingListInput {
 
   @Field(type => Float)
   maxBudget: number;
+
+  @Field()
+  shoppingListTypeId: string;
 }

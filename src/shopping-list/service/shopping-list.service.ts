@@ -10,6 +10,10 @@ export class ShoppingListService {
     return Collection(ShoppingList).find();
   }
 
+  findById(id: string): Promise<ShoppingList> {
+    return Collection(ShoppingList).get(id);
+  }
+
   create(shoppingList: ShoppingList): Promise<ShoppingList> {
     return Collection(ShoppingList).create(shoppingList);
   }
