@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
-import { User } from '../model/user.model';
 import { Address } from '../../address/model/address.model';
+import { User } from '../model/user.model';
 
 @Injectable()
 export class UserService {
@@ -12,20 +12,22 @@ export class UserService {
   }
 
   async create(user: User): Promise<User> {
-    const addr = user.address
-    delete user.address
+    const addresses = user.addresses;
+    delete user.addresses;
     const newUser = await Collection(User).create(user);
-    addr.forEach(function (addressItem) {
-      let address = Object.assign(new Address(), addressItem)
-      Collection(User).doc(newUser.id).collection(Address).create(address)
-    })
+    addresses.forEach(address =>
+      Collection(User)
+        .doc(newUser.id)
+        .collection(Address)
+        .create(Object.assign(new Address(), address)),
+    );
 
-    return newUser
+    return newUser;
   }
-  async address(user: User): Promise<Address[]> {
-    const userRef = Collection(User).doc(user.id).collection(Address)
-    const addressSnap = await userRef.find()
-    return addressSnap
+  async resolveAddress(user: User): Promise<Address[]> {
+    return await Collection(User)
+      .doc(user.id)
+      .collection(Address)
+      .find();
   }
-
 }
