@@ -1,19 +1,17 @@
 import { Field, Float, InputType } from '@nestjs/graphql';
+import { DateTime } from 'luxon';
 
 @InputType()
 export class CreateShoppingListInput {
   @Field()
-  street: string;
-
-  @Field()
-  zipcode: string;
+  content: string;
 
   @Field({ nullable: true })
-  additionalInfo?: string;
+  note?: string;
 
-  @Field(type => Float, { nullable: true })
-  latitude?: number;
+  @Field(type => Float)
+  minBudget: number;
 
-  @Field(type => Float, { nullable: true })
-  longitude?: number;
+  @Field(type => Float)
+  maxBudget: number;
 }
