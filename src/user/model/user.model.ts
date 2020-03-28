@@ -42,6 +42,6 @@ export class User extends BaseModel {
     name: 'addresses',
     entity: Address,
   })
-  addressesRef: ICollection<Address>;
+  address: ICollection<Address>[];
 
 }

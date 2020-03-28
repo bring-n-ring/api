@@ -11,13 +11,21 @@ export class UserService {
     return Collection(User).find();
   }
 
-  create(user: User): Promise<User> {
-    return Collection(User).create(user);
+  async create(user: User): Promise<User> {
+    const addr = user.address
+    delete user.address
+    const newUser = await Collection(User).create(user);
+    addr.forEach(function (addressItem) {
+      let address = Object.assign(new Address(), addressItem)
+      Collection(User).doc(newUser.id).collection(Address).create(address)
+    })
+
+    return newUser
   }
-  address(user: User): Promise<Address[]> {
-    const userRef = Collection(User).doc(user.id);
-    const address = userRef.collection(Address).find();
-    return address
+  async address(user: User): Promise<Address[]> {
+    const userRef = Collection(User).doc(user.id).collection(Address)
+    const addressSnap = await userRef.find()
+    return addressSnap
   }
 
 }
