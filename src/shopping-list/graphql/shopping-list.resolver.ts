@@ -6,8 +6,8 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Timestamp } from 'firebase-firestorm';
 import { DateTime } from 'luxon';
+import { Timestamp } from '../../core/db/firestore-utils';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { ShoppingList } from '../model/shopping-list.model';
 import { ShoppingListService } from '../service/shopping-list.service';

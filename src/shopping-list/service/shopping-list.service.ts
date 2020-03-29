@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import * as admin from 'firebase-admin';
 import { Collection } from 'firebase-firestorm';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { CreateShoppingListInput } from '../graphql/create-shopping-list-input';
 import { ShoppingList } from '../model/shopping-list.model';
+import { serverTimestamp } from '../../core/db/firestore-utils';
 
 @Injectable()
 export class ShoppingListService {
@@ -23,7 +23,7 @@ export class ShoppingListService {
     shoppingList.shoppingListType = Collection(ShoppingListType).doc(
       shoppingList.shoppingListTypeId,
     );
-    shoppingList.createdAtTimestamp = admin.firestore.FieldValue.serverTimestamp();
+    shoppingList.createdAtTimestamp = serverTimestamp();
     return Collection(ShoppingList).create(shoppingList);
   }
 
