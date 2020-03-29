@@ -5,6 +5,7 @@ import {
   IDocumentRef,
   rootCollection,
 } from 'firebase-firestorm';
+import { DateTime } from 'luxon';
 import { BaseModel } from '../../core/model/base.model';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 
@@ -35,4 +36,10 @@ export class ShoppingList extends BaseModel {
     entity: ShoppingListType,
   })
   shoppingListType!: IDocumentRef<ShoppingListType>;
+
+  @Field()
+  createdAt: DateTime;
+
+  @field()
+  createdAtTimestamp?;
 }
