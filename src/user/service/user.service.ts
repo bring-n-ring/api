@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
 import { Address } from '../../address/model/address.model';
-import { CreateUserInput } from '../graphql/create-user-input';
+import { CreateUserInput } from '../graphql/dto/create-user-input';
 import { User } from '../model/user.model';
 
 @Injectable()

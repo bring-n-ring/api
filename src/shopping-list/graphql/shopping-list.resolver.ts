@@ -7,11 +7,12 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { DateTime } from 'luxon';
-import { Timestamp } from '../../core/db/firestore-utils';
+import { timestampToDateTime } from '../../core/db/firestore-timestamp';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { ShoppingList } from '../model/shopping-list.model';
 import { ShoppingListService } from '../service/shopping-list.service';
-import { CreateShoppingListInput } from './create-shopping-list-input';
+import { CreateShoppingListInput } from './dto/create-shopping-list-input';
+import { UpdateShoppingListInput } from './dto/update-shopping-list-input';
 
 @Resolver(of => ShoppingList)
 export class ShoppingListResolver {
@@ -36,8 +37,12 @@ export class ShoppingListResolver {
 
   @ResolveField('createdAt', returns => DateTime)
   createdAt(@Parent() shoppingList: ShoppingList) {
-    const timestamp = shoppingList.createdAtTimestamp as Timestamp;
-    return DateTime.fromJSDate(timestamp.toDate());
+    return timestampToDateTime(shoppingList.createdAtTimestamp);
+  }
+
+  @ResolveField('updatedAt', returns => DateTime)
+  updatedAt(@Parent() shoppingList: ShoppingList) {
+    return timestampToDateTime(shoppingList.updatedAtTimestamp);
   }
 
   @Mutation(returns => ShoppingList)
@@ -45,6 +50,15 @@ export class ShoppingListResolver {
     @Args('createShoppingListInput') args: CreateShoppingListInput,
   ): Promise<ShoppingList> {
     return this.shoppingListService.create(
+      Object.assign(new ShoppingList(), args),
+    );
+  }
+
+  @Mutation(returns => ShoppingList)
+  updateShoppingList(
+    @Args('updateShoppingListInput') args: UpdateShoppingListInput,
+  ): Promise<ShoppingList> {
+    return this.shoppingListService.update(
       Object.assign(new ShoppingList(), args),
     );
   }

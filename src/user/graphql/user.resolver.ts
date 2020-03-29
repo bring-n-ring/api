@@ -9,7 +9,7 @@ import {
 import { Address } from '../../address/model/address.model';
 import { User } from '../model/user.model';
 import { UserService } from '../service/user.service';
-import { CreateUserInput } from './create-user-input';
+import { CreateUserInput } from './dto/create-user-input';
 
 @Resolver(of => User)
 export class UserResolver {
