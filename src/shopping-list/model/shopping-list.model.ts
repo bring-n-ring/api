@@ -30,8 +30,9 @@ export class ShoppingList extends BaseModel {
   maxBudget: number;
 
   @Field(type => ShoppingListType)
-  shoppingListType: ShoppingListType;
-
-  @field()
-  shoppingListTypeId: string;
+  @documentRef({
+    name: 'shoppingListType',
+    entity: ShoppingListType,
+  })
+  shoppingListType!: IDocumentRef<ShoppingListType>;
 }

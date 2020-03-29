@@ -22,7 +22,7 @@ export class UserResolver {
 
   @ResolveField('addresses', returns => [Address])
   async address(@Parent() user: User) {
-    return this.userService.resolveAddress(user);
+    return this.userService.resolveAddresses(user);
   }
 
   @Mutation(returns => User)

@@ -26,6 +26,6 @@ export class CreateUserInput {
   totalBringALings?: number;
 
   @Field(type => [CreateAddressInput])
-  address: Address[];
+  addresses: Address[];
 
 }

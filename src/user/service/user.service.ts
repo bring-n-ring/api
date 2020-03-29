@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
 import { Address } from '../../address/model/address.model';
+import { CreateUserInput } from '../graphql/create-user-input';
 import { User } from '../model/user.model';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class UserService {
     return Collection(User).find();
   }
 
-  async create(user: User): Promise<User> {
+  async create(user: User & CreateUserInput): Promise<User> {
     const addresses = user.addresses;
     delete user.addresses;
     const newUser = await Collection(User).create(user);
@@ -24,7 +25,8 @@ export class UserService {
 
     return newUser;
   }
-  async resolveAddress(user: User): Promise<Address[]> {
+
+  async resolveAddresses(user: User): Promise<Address[]> {
     return await Collection(User)
       .doc(user.id)
       .collection(Address)

@@ -1,4 +1,12 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { ShoppingListTypeService } from '../../shopping-list-type/service/shopping-list-type.service';
 import { ShoppingList } from '../model/shopping-list.model';
 import { ShoppingListService } from '../service/shopping-list.service';
@@ -17,14 +25,15 @@ export class ShoppingListResolver {
   }
 
   @Query(returns => ShoppingList)
-  async shoppingList(
+  shoppingList(
     @Args({ name: 'id', type: () => String }) id: string,
   ): Promise<ShoppingList> {
-    const shoppingList = await this.shoppingListService.findById(id);
-    shoppingList.shoppingListType = await this.shoppingListTypeService.findById(
-      shoppingList.shoppingListTypeId,
-    );
-    return shoppingList;
+    return this.shoppingListService.findById(id);
+  }
+
+  @ResolveField('shoppingListType', returns => ShoppingListType)
+  async shoppingListType(@Parent() shoppingList: ShoppingList) {
+    return this.shoppingListService.resolveShoppingListType(shoppingList);
   }
 
   @Mutation(returns => ShoppingList)
