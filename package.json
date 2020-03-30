@@ -40,7 +40,7 @@
     "firebase-functions": "^3.3.0",
     "graphql": "14.6.0",
     "graphql-tools": "4.0.7",
-    "luxon": "1.22.2",
+    "luxon": "^1.22.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
@@ -51,6 +51,7 @@
     "@nestjs/testing": "^6.7.1",
     "@types/express": "^4.17.1",
     "@types/jest": "^24.0.18",
+    "@types/luxon": "^1.22.0",
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
