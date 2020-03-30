@@ -28,4 +28,7 @@ export class CreateUserInput {
   @Field(type => [CreateAddressInput])
   addresses: Address[];
 
+  @Field(type => [String])
+  roleIDs: string[];
+
 }
