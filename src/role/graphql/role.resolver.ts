@@ -1,12 +1,4 @@
-import {
-    Args,
-    Mutation,
-    Parent,
-    Query,
-    ResolveField,
-    Resolver,
-  } from '@nestjs/graphql';
-
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Role } from '../model/role.model';
 import { RoleService } from '../service/role.service';
 import { CreateRoleInput } from './create-role-input';

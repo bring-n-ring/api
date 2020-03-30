@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { Address } from '../../../address/model/address.model'
+import { Address } from '../../../address/model/address.model';
 import { CreateAddressInput } from '../../../address/graphql/create-address-input';
 
 @InputType()
@@ -30,5 +30,4 @@ export class CreateUserInput {
 
   @Field(type => [String])
   roleIDs: string[];
-
 }

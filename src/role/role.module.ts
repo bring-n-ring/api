@@ -3,6 +3,6 @@ import { RoleResolver } from './graphql/role.resolver';
 import { RoleService } from './service/role.service';
 
 @Module({
-    providers: [RoleResolver, RoleService],
+  providers: [RoleResolver, RoleService],
 })
 export class RoleModule {}

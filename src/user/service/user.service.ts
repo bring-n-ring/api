@@ -7,7 +7,7 @@ import { User } from '../model/user.model';
 
 @Injectable()
 export class UserService {
-  constructor() { }
+  constructor() {}
 
   findAll(): Promise<User[]> {
     return Collection(User).find();
@@ -19,7 +19,7 @@ export class UserService {
     user.roles = [];
 
     user.roleIDs.forEach(async roleID => {
-      user.roles.push(Collection(Role).doc(roleID))
+      user.roles.push(Collection(Role).doc(roleID));
     });
 
     const newUser = await Collection(User).create(user);
@@ -34,22 +34,18 @@ export class UserService {
     return newUser;
   }
 
-  async resolveAddresses(
-    user: User
-  ): Promise<Address[]> {
+  async resolveAddresses(user: User): Promise<Address[]> {
     return await Collection(User)
       .doc(user.id)
       .collection(Address)
       .find();
   }
 
-  async resolveRoles(
-    user: User
-  ): Promise<Role[]> {
+  async resolveRoles(user: User): Promise<Role[]> {
     const roles = await user.roles;
     let rolesItems = [];
     roles.forEach(async role => {
-      rolesItems.push(Collection(Role).get(role.id))
+      rolesItems.push(Collection(Role).get(role.id));
     });
     return await rolesItems;
   }

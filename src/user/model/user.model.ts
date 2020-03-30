@@ -1,8 +1,15 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { field, rootCollection, subCollection, ICollection, IDocumentRef, documentRef } from 'firebase-firestorm';
+import {
+  field,
+  rootCollection,
+  subCollection,
+  ICollection,
+  IDocumentRef,
+  documentRef,
+} from 'firebase-firestorm';
 import { BaseModel } from '../../core/model/base.model';
-import { Address } from '../../address/model/address.model'
-import { Role } from '../../role/model/role.model'
+import { Address } from '../../address/model/address.model';
+import { Role } from '../../role/model/role.model';
 
 @ObjectType()
 @rootCollection({
@@ -51,5 +58,4 @@ export class User extends BaseModel {
     entity: Role,
   })
   roles!: IDocumentRef<Role>[];
-
 }
