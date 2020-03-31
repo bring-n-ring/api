@@ -4,7 +4,7 @@
 
 1. Install Firebase CLI `npm install -g firebase-tools`
 2. Login to Firebase `firebase login`
-3. In the project root folder run `npm install`
+3. In the project root folder run `npm install` (have to use node 12)
 4. To run function locally run `npm run serve`
 
 ## Local debugging with emulators
