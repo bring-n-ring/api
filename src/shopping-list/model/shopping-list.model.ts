@@ -6,7 +6,6 @@ import {
   rootCollection,
 } from 'firebase-firestorm';
 import { DateTime } from 'luxon';
-import { FieldValue } from '../../core/db/firestore-timestamp';
 import { BaseModel } from '../../core/model/base.model';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 
@@ -42,11 +41,11 @@ export class ShoppingList extends BaseModel {
   createdAt: DateTime;
 
   @field()
-  createdAtTimestamp?: FieldValue;
+  createdAtTimestamp?;
 
   @Field({ nullable: true })
   updatedAt: DateTime;
 
   @field()
-  updatedAtTimestamp?: FieldValue;
+  updatedAtTimestamp?;
 }
