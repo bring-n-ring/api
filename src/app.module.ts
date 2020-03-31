@@ -8,6 +8,7 @@ import { ShoppingListTypeModule } from './shopping-list-type/shopping-list-type.
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RoleModule } from './role/role.module';
     ShoppingListTypeModule,
     UserModule,
     RoleModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateTimeScalar],
