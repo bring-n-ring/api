@@ -1,5 +1,11 @@
 # "Bring and Ring" GraphQL API firebase cloud function
 
+## Prerequisites
+
+1. Generate a new private key [here](https://console.firebase.google.com/u/0/project/bring-and-ring/settings/serviceaccounts/adminsdk)
+2. Copy the downloaded file to a reasonable place
+3. Add the following to your shell profile: `export GOOGLE_APPLICATION_CREDENTIALS="/Path/to/your/json-file.json"`
+
 ## Local installation
 
 1. Install Firebase CLI `npm install -g firebase-tools`
