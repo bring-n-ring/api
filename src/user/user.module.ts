@@ -3,6 +3,7 @@ import { UserResolver } from './graphql/user.resolver';
 import { UserService } from './service/user.service';
 
 @Module({
-  providers: [UserResolver, UserService],
+  providers: [UserService, UserResolver],
+  exports: [UserService],
 })
 export class UserModule {}

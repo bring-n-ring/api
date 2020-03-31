@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { TagModule } from './tag/tag.module';
 import { OrderModule } from './order/order.module';
+import { AuthModule } from './core/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { OrderModule } from './order/order.module';
       playground: true,
       introspection: true,
     }),
+    AuthModule,
     AddressModule,
     ShoppingListModule,
     ShoppingListTypeModule,
