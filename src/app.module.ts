@@ -9,6 +9,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { TagModule } from './tag/tag.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TagModule } from './tag/tag.module';
     UserModule,
     RoleModule,
     TagModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateTimeScalar],

@@ -13,6 +13,10 @@ export class UserService {
     return Collection(User).find();
   }
 
+  findById(id: string): Promise<User> {
+    return Collection(User).get(id);
+  }
+
   async create(user: User & CreateUserInput): Promise<User> {
     const addresses = user.addresses;
     delete user.addresses;
