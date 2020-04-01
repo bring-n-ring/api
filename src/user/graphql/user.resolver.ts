@@ -30,11 +30,4 @@ export class UserResolver {
   async roles(@Parent() user: User) {
     return this.userService.resolveRoles(user);
   }
-
-  @Mutation(returns => User)
-  async createUser(
-    @Args('createUserInput') args: CreateUserInput,
-  ): Promise<User> {
-    return this.userService.create(Object.assign(new User(), args));
-  }
 }

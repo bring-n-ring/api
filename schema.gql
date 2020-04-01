@@ -52,6 +52,7 @@ input CreateUserInput {
   firstName: String!
   lastName: String!
   email: String!
+  password: String!
   phone: String
   description: String
   image: String
@@ -67,12 +68,12 @@ type Mutation {
   createAddress(createAddressInput: CreateAddressInput!): Address!
   createShoppingList(createShoppingListInput: CreateShoppingListInput!): ShoppingList!
   updateShoppingList(updateShoppingListInput: UpdateShoppingListInput!): ShoppingList!
-  createUser(createUserInput: CreateUserInput!): User!
   createRole(createRoleInput: CreateRoleInput!): Role!
   createTag(createTagInput: CreateTagInput!): Tag!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   login(createLoginInput: CreateLoginInput!): User!
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
 type Order {

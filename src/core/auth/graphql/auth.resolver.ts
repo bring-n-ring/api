@@ -4,20 +4,16 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../../../user/service/user.service';
 import { CreateLoginInput } from './create-login-input';
 import { User } from '../../../user/model/user.model';
+import { AuthService } from '../service/auth.service';
+import { CreateUserInput } from '../../../user/graphql/dto/create-user-input';
 
 @Resolver('Auth')
 export class AuthResolver {
   constructor(
     private readonly jwt: JwtService,
+    private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {}
-
-  // @Mutation(returns => Tag)
-  //   async createTag(
-  //     @Args('createTagInput') args: CreateTagInput,
-  //   ): Promise<Tag> {
-  //     return this.tagService.create(Object.assign(new Tag(), args));
-  //   }
 
   @Mutation(returns => User)
   async login(@Args('createLoginInput') args: CreateLoginInput): Promise<any> {
@@ -28,24 +24,21 @@ export class AuthResolver {
     return { user };
   }
 
-  //   @Mutation()
-  //   async create() {
-  //     const emailExists = await this.prisma.client.$exists.user({
-  //       email: signUpInputDto.email,
-  //     });
-  //     if (emailExists) {
-  //       throw Error('Email is already in use');
-  //     }
-  //     const password = await bcryptjs.hash(signUpInputDto.password, 10);
+  @Mutation(returns => User)
+  async createUser(@Args('createUserInput') args: CreateUserInput) {
+    const { error } = await this.authService.createLogin(
+      args.email,
+      args.password,
+    );
 
-  //     const user = await this.prisma.client.createUser({
-  //       ...signUpInputDto,
-  //       password,
-  //     });
+    if (error) {
+      const { message } = (error as any).errorInfo || {};
+      throw Error(message || 'Something went wrong');
+    }
+    const user = await this.userService.create(Object.assign(new User(), args));
 
-  //     const jwt = this.jwt.sign({ id: user.id });
-  //     res.cookie('token', jwt, { httpOnly: true });
+    const jwt = this.jwt.sign({ id: user.id });
 
-  //     return user;
-  //   }
+    return user;
+  }
 }

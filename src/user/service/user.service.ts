@@ -48,7 +48,7 @@ export class UserService {
   async resolveRoles(user: User): Promise<Role[]> {
     const roles = await user.roles;
     let rolesItems = [];
-    roles.forEach(async role => {
+    (roles || []).forEach(async role => {
       rolesItems.push(Collection(Role).get(role.id));
     });
     return await rolesItems;
