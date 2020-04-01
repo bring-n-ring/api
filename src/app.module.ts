@@ -15,7 +15,7 @@ import { AuthModule } from './core/auth/auth.module';
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: true,
       playground: true,
       introspection: true,
     }),

@@ -3,6 +3,7 @@ import { Mutation, Resolver, Args } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../../../user/service/user.service';
 import { CreateLoginInput } from './create-login-input';
+import { User } from '../../../user/model/user.model';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -18,13 +19,13 @@ export class AuthResolver {
   //     return this.tagService.create(Object.assign(new Tag(), args));
   //   }
 
-  @Mutation()
+  @Mutation(returns => User)
   async login(@Args('createLoginInput') args: CreateLoginInput): Promise<any> {
     const id = 'B9U3HgOIQErk4x76VeBU';
     const jwt = this.jwt.sign({ id });
     const user = await this.userService.findById(id);
 
-    return { user, token: jwt };
+    return { user };
   }
 
   //   @Mutation()

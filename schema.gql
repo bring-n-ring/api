@@ -19,6 +19,11 @@ input CreateAddressInput {
   longitude: Float
 }
 
+input CreateLoginInput {
+  email: String!
+  password: String!
+}
+
 input CreateOrderInput {
   lingerId: String!
   shoppingListId: String!
@@ -55,24 +60,19 @@ input CreateUserInput {
   roleIDs: [String!]!
 }
 
-"""
-Date custom scalar type
-"""
+"""Date custom scalar type"""
 scalar DateTime
 
 type Mutation {
   createAddress(createAddressInput: CreateAddressInput!): Address!
-  createShoppingList(
-    createShoppingListInput: CreateShoppingListInput!
-  ): ShoppingList!
-  updateShoppingList(
-    updateShoppingListInput: UpdateShoppingListInput!
-  ): ShoppingList!
+  createShoppingList(createShoppingListInput: CreateShoppingListInput!): ShoppingList!
+  updateShoppingList(updateShoppingListInput: UpdateShoppingListInput!): ShoppingList!
   createUser(createUserInput: CreateUserInput!): User!
   createRole(createRoleInput: CreateRoleInput!): Role!
   createTag(createTagInput: CreateTagInput!): Tag!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  login(createLoginInput: CreateLoginInput!): User!
 }
 
 type Order {
