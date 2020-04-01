@@ -1,0 +1,160 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Address {
+  id: String!
+  street: String!
+  zipcode: String!
+  additionalInfo: String
+  latitude: Float
+  longitude: Float
+}
+
+input CreateAddressInput {
+  street: String!
+  zipcode: String!
+  additionalInfo: String
+  latitude: Float
+  longitude: Float
+}
+
+input CreateOrderInput {
+  lingerId: String!
+  shoppingListId: String!
+  deadline: DateTime!
+}
+
+input CreateRoleInput {
+  id: String!
+  name: String!
+}
+
+input CreateShoppingListInput {
+  content: String!
+  note: String
+  minBudget: Float!
+  maxBudget: Float!
+  shoppingListTypeId: String!
+}
+
+input CreateTagInput {
+  name: String!
+  category: String!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  description: String
+  image: String
+  totalBringALings: Int
+  addresses: [CreateAddressInput!]!
+  roleIDs: [String!]!
+}
+
+"""
+Date custom scalar type
+"""
+scalar DateTime
+
+type Mutation {
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  createShoppingList(
+    createShoppingListInput: CreateShoppingListInput!
+  ): ShoppingList!
+  updateShoppingList(
+    updateShoppingListInput: UpdateShoppingListInput!
+  ): ShoppingList!
+  createUser(createUserInput: CreateUserInput!): User!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+}
+
+type Order {
+  id: String!
+  status: String!
+  bringer: User
+  linger: User!
+  shoppingList: ShoppingList!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  acceptedAt: DateTime
+  deadline: DateTime
+}
+
+type Query {
+  addresses: [Address!]!
+  shoppingListTypes: [ShoppingListType!]!
+  shoppingListType(id: String!): ShoppingListType!
+  shoppingLists: [ShoppingList!]!
+  shoppingList(id: String!): ShoppingList!
+  users: [User!]!
+  roles: [Role!]!
+  tags: [Tag!]!
+  orders: [Order!]!
+  order(id: String!): Order!
+}
+
+type Role {
+  id: String!
+  name: String!
+}
+
+type ShoppingList {
+  id: String!
+  content: String!
+  note: String
+  minBudget: Float!
+  maxBudget: Float!
+  shoppingListType: ShoppingListType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type ShoppingListType {
+  id: String!
+  name: String!
+}
+
+type Tag {
+  id: String!
+  name: String!
+  category: String!
+}
+
+input UpdateOrderInput {
+  id: String!
+  status: String!
+  lingerId: String!
+  bringerId: String!
+  shoppingListId: String!
+  acceptedAt: DateTime!
+  deadline: DateTime!
+}
+
+input UpdateShoppingListInput {
+  id: String!
+  content: String!
+  note: String
+  minBudget: Float!
+  maxBudget: Float!
+  shoppingListTypeId: String!
+}
+
+type User {
+  id: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  description: String
+  image: String
+  totalBringALings: Int!
+  roles: [Role!]!
+  addresses: [Address!]!
+}
