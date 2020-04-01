@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
+import { serverTimestamp } from '../../core/db/firestore-timestamp';
 import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { CreateShoppingListInput } from '../graphql/dto/create-shopping-list-input';
-import { ShoppingList } from '../model/shopping-list.model';
-import { serverTimestamp } from '../../core/db/firestore-timestamp';
 import { UpdateShoppingListInput } from '../graphql/dto/update-shopping-list-input';
+import { ShoppingList } from '../model/shopping-list.model';
 
 @Injectable()
 export class ShoppingListService {

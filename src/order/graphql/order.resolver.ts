@@ -16,11 +16,13 @@ import { Order } from '../model/order.model';
 import { OrderService } from '../service/order.service';
 import { CreateOrderInput } from './dto/create-order-input';
 import { UpdateOrderInput } from './dto/update-order-input';
+import { OrderInputValidator } from './order-input.validator';
 
 @Resolver(of => Order)
 export class OrderResolver {
   constructor(
     private readonly orderService: OrderService,
+    private readonly orderInputService: OrderInputValidator,
     private readonly userService: UserService,
     private readonly shoppingListService: ShoppingListService,
   ) {}
@@ -40,14 +42,20 @@ export class OrderResolver {
     return this.userService.findById(order.linger.id);
   }
 
-  @ResolveField('bringer', returns => User)
+  @ResolveField('bringer', returns => User, { nullable: true })
   bringer(@Parent() order: Order) {
-    return this.userService.findById(order.bringer.id);
+    if (order.bringer) {
+      return this.userService.findById(order.bringer.id);
+    }
   }
 
-  @ResolveField('shoppingList', returns => ShoppingList)
+  @ResolveField('shoppingLists', returns => [ShoppingList])
   shoppingList(@Parent() order: Order) {
-    return this.shoppingListService.findById(order.shoppingList.id);
+    return Promise.all(
+      order.shoppingLists.map(shoppingList =>
+        this.shoppingListService.findById(shoppingList.id),
+      ),
+    );
   }
 
   @ResolveField('createdAt', returns => DateTime)
@@ -71,16 +79,20 @@ export class OrderResolver {
   }
 
   @Mutation(returns => Order)
-  createOrder(
+  async createOrder(
     @Args('createOrderInput') args: CreateOrderInput,
   ): Promise<Order> {
+    await this.orderInputService.validate(args);
+
     return this.orderService.create(Object.assign(new Order(), args));
   }
 
   @Mutation(returns => Order)
-  updateOrder(
+  async updateOrder(
     @Args('updateOrderInput') args: UpdateOrderInput,
   ): Promise<Order> {
+    await this.orderInputService.validate(args);
+
     return this.orderService.update(Object.assign(new Order(), args));
   }
 }

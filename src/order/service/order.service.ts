@@ -22,7 +22,9 @@ export class OrderService {
 
   create(order: Order & CreateOrderInput): Promise<Order> {
     order.linger = Collection(User).doc(order.lingerId);
-    order.shoppingList = Collection(ShoppingList).doc(order.shoppingListId);
+    order.shoppingLists = order.shoppingListIds.map(id =>
+      Collection(ShoppingList).doc(id),
+    );
     order.createdAtTimestamp = serverTimestamp();
     order.deadlineTimestamp = dateTimeToTimestamp(order.deadline);
     return Collection(Order).create(order);
@@ -31,7 +33,9 @@ export class OrderService {
   update(order: Order & UpdateOrderInput): Promise<Order> {
     order.linger = Collection(User).doc(order.lingerId);
     order.bringer = Collection(User).doc(order.bringerId);
-    order.shoppingList = Collection(ShoppingList).doc(order.shoppingListId);
+    order.shoppingLists = order.shoppingListIds.map(id =>
+      Collection(ShoppingList).doc(id),
+    );
     order.updatedAtTimestamp = serverTimestamp();
     order.acceptedAtTimestamp = dateTimeToTimestamp(order.acceptedAt);
     order.deadlineTimestamp = dateTimeToTimestamp(order.deadline);

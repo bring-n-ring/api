@@ -16,8 +16,8 @@ export class UpdateOrderInput {
   @Field()
   bringerId: string;
 
-  @Field()
-  shoppingListId: string;
+  @Field(type => [String])
+  shoppingListIds: string[];
 
   @Field()
   acceptedAt: DateTime;
