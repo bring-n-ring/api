@@ -4,6 +4,8 @@ import { Address } from '../../address/model/address.model';
 import { Role } from '../../role/model/role.model';
 import { CreateUserInput } from '../graphql/dto/create-user-input';
 import { User } from '../model/user.model';
+import { Tag } from '../../tag/model/tag.model';
+import { CreateUserTagsInput } from '../graphql/dto/create-user-tags-input';
 
 @Injectable()
 export class UserService {
@@ -24,6 +26,12 @@ export class UserService {
 
     user.roleIDs.forEach(async roleID => {
       user.roles.push(Collection(Role).doc(roleID));
+    });
+
+    user.tags = [];
+
+    user.tagsIDs.forEach(async tagID => {
+      user.tags.push(Collection(Tag).doc(tagID));
     });
 
     const newUser = await Collection(User).create(user);
@@ -53,4 +61,36 @@ export class UserService {
     });
     return await rolesItems;
   }
+
+  async resolveTags(user: User): Promise<Tag[]> {
+    const tags = await user.tags;
+    let tagsItems = [];
+    tags.forEach(async tag => {
+      tagsItems.push(Collection(Tag).get(tag.id));
+    });
+    return await tagsItems;
+  }
+
+  async addTags (userTags: CreateUserTagsInput): Promise<User> {
+     const user = await Collection(User).doc(userTags.userID).get()
+
+     userTags.tagsIDs.forEach(async tag => {
+      let exists = false
+      user.tags.forEach(async existedTag => {
+        if (existedTag.id == tag) {
+          exists = true
+        }
+      });
+      if (!exists) {
+        user.tags.push(Collection(Tag).doc(tag));
+      }
+     });
+
+     const updatedUser = new User()
+     updatedUser.id = user.id
+     updatedUser.tags = user.tags
+
+     return await Collection(User).update(updatedUser)
+  }
+
 }

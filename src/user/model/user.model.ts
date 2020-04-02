@@ -10,6 +10,7 @@ import {
 import { BaseModel } from '../../core/model/base.model';
 import { Address } from '../../address/model/address.model';
 import { Role } from '../../role/model/role.model';
+import { Tag } from '../../tag/model/tag.model';
 
 @ObjectType()
 @rootCollection({
@@ -58,4 +59,11 @@ export class User extends BaseModel {
     entity: Role,
   })
   roles!: IDocumentRef<Role>[];
+
+  @Field(type => [Tag])
+  @documentRef({
+    name: 'tags',
+    entity: Tag,
+  })
+  tags: IDocumentRef<Tag>[];
 }

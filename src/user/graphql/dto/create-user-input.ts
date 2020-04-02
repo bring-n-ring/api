@@ -30,4 +30,8 @@ export class CreateUserInput {
 
   @Field(type => [String])
   roleIDs: string[];
+
+  @Field(type => [String])
+  tagsIDs: string[];
+
 }
