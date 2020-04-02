@@ -1,4 +1,5 @@
-import { Field, Float, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { BudgetInput } from '../../../budget/graphql/dto/budget-input';
 
 @InputType()
 export class CreateShoppingListInput {
@@ -8,11 +9,8 @@ export class CreateShoppingListInput {
   @Field({ nullable: true })
   note?: string;
 
-  @Field(type => Float)
-  minBudget: number;
-
-  @Field(type => Float)
-  maxBudget: number;
+  @Field()
+  budget: BudgetInput;
 
   @Field()
   shoppingListTypeId: string;

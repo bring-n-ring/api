@@ -1,21 +1,20 @@
-import { Field, Float, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { Budget } from '../../../budget/model/budget.model';
+import { BudgetInput } from '../../../budget/graphql/dto/budget-input';
 
 @InputType()
 export class UpdateShoppingListInput {
   @Field()
   id: string;
 
-  @Field()
-  content: string;
+  @Field({ nullable: true })
+  content?: string;
 
   @Field({ nullable: true })
   note?: string;
 
-  @Field(type => Float)
-  minBudget: number;
-
-  @Field(type => Float)
-  maxBudget: number;
+  @Field({ nullable: true })
+  budget?: BudgetInput;
 
   @Field()
   shoppingListTypeId: string;
