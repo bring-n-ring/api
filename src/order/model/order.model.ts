@@ -16,7 +16,7 @@ import { OrderStatus } from './order-status.enum';
   name: 'order',
 })
 export class Order extends BaseModel {
-  @Field()
+  @Field(type => OrderStatus)
   @field()
   status: OrderStatus;
 

@@ -8,8 +8,6 @@ import {
 } from '@nestjs/graphql';
 import { DateTime } from 'luxon';
 import { timestampToDateTime } from '../../core/db/firestore-timestamp';
-import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
-import { ShoppingListTypeService } from '../../shopping-list-type/service/shopping-list-type.service';
 import { ShoppingList } from '../model/shopping-list.model';
 import { ShoppingListService } from '../service/shopping-list.service';
 import { CreateShoppingListInput } from './dto/create-shopping-list-input';
@@ -17,10 +15,7 @@ import { UpdateShoppingListInput } from './dto/update-shopping-list-input';
 
 @Resolver(of => ShoppingList)
 export class ShoppingListResolver {
-  constructor(
-    private readonly shoppingListService: ShoppingListService,
-    private readonly shoppingListTypeService: ShoppingListTypeService,
-  ) {}
+  constructor(private readonly shoppingListService: ShoppingListService) {}
 
   @Query(returns => [ShoppingList])
   shoppingLists(): Promise<ShoppingList[]> {
@@ -32,13 +27,6 @@ export class ShoppingListResolver {
     @Args({ name: 'id', type: () => String }) id: string,
   ): Promise<ShoppingList> {
     return this.shoppingListService.findById(id);
-  }
-
-  @ResolveField('shoppingListType', returns => ShoppingListType)
-  shoppingListType(@Parent() shoppingList: ShoppingList) {
-    return this.shoppingListTypeService.findById(
-      shoppingList.shoppingListType.id,
-    );
   }
 
   @ResolveField('createdAt', returns => DateTime)

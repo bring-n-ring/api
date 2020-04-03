@@ -7,21 +7,21 @@ export class UpdateOrderInput {
   @Field()
   id: string;
 
-  @Field()
-  status: OrderStatus;
+  @Field(type => OrderStatus, { nullable: true })
+  status?: OrderStatus;
 
-  @Field()
-  lingerId: string;
+  @Field({ nullable: true })
+  lingerId?: string;
 
-  @Field()
-  bringerId: string;
+  @Field({ nullable: true })
+  bringerId?: string;
 
-  @Field(type => [String])
-  shoppingListIds: string[];
+  @Field(type => [String], { nullable: true })
+  shoppingListIds?: string[];
 
-  @Field()
-  acceptedAt: DateTime;
+  @Field({ nullable: true })
+  acceptedAt?: DateTime;
 
-  @Field()
-  deadline: DateTime;
+  @Field({ nullable: true })
+  deadline?: DateTime;
 }

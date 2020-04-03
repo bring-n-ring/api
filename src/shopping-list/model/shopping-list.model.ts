@@ -1,15 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import {
-  documentRef,
-  field,
-  IDocumentRef,
-  map,
-  rootCollection,
-} from 'firebase-firestorm';
+import { field, map, rootCollection } from 'firebase-firestorm';
 import { DateTime } from 'luxon';
-import { BaseModel } from '../../core/model/base.model';
-import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
 import { Budget } from '../../budget/model/budget.model';
+import { BaseModel } from '../../core/model/base.model';
+import { ShoppingListType } from './shopping-list-type.enum';
 
 @ObjectType()
 @rootCollection({
@@ -29,11 +23,8 @@ export class ShoppingList extends BaseModel {
   budget!: Budget;
 
   @Field(type => ShoppingListType)
-  @documentRef({
-    name: 'shoppingListType',
-    entity: ShoppingListType,
-  })
-  shoppingListType!: IDocumentRef<ShoppingListType>;
+  @field()
+  shoppingListType: ShoppingListType;
 
   @Field()
   createdAt: DateTime;

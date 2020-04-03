@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Budget } from '../../../budget/model/budget.model';
 import { BudgetInput } from '../../../budget/graphql/dto/budget-input';
+import { ShoppingListType } from '../../model/shopping-list-type.enum';
 
 @InputType()
 export class UpdateShoppingListInput {
@@ -16,6 +16,6 @@ export class UpdateShoppingListInput {
   @Field({ nullable: true })
   budget?: BudgetInput;
 
-  @Field()
-  shoppingListTypeId: string;
+  @Field(type => ShoppingListType, { nullable: true })
+  shoppingListType?: ShoppingListType;
 }
