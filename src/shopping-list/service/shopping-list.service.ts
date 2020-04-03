@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
-import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
-import { CreateShoppingListInput } from '../graphql/dto/create-shopping-list-input';
-import { ShoppingList } from '../model/shopping-list.model';
 import { serverTimestamp } from '../../core/db/firestore-timestamp';
+import { CreateShoppingListInput } from '../graphql/dto/create-shopping-list-input';
 import { UpdateShoppingListInput } from '../graphql/dto/update-shopping-list-input';
+import { ShoppingList } from '../model/shopping-list.model';
 
 @Injectable()
 export class ShoppingListService {
@@ -21,9 +20,6 @@ export class ShoppingListService {
   create(
     shoppingList: ShoppingList & CreateShoppingListInput,
   ): Promise<ShoppingList> {
-    shoppingList.shoppingListType = Collection(ShoppingListType).doc(
-      shoppingList.shoppingListTypeId,
-    );
     shoppingList.createdAtTimestamp = serverTimestamp();
     return Collection(ShoppingList).create(shoppingList);
   }
@@ -31,9 +27,6 @@ export class ShoppingListService {
   update(
     shoppingList: ShoppingList & UpdateShoppingListInput,
   ): Promise<ShoppingList> {
-    shoppingList.shoppingListType = Collection(ShoppingListType).doc(
-      shoppingList.shoppingListTypeId,
-    );
     shoppingList.updatedAtTimestamp = serverTimestamp();
     return Collection(ShoppingList).update(shoppingList);
   }

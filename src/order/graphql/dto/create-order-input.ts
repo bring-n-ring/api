@@ -6,8 +6,8 @@ export class CreateOrderInput {
   @Field()
   lingerId: string;
 
-  @Field()
-  shoppingListId: string;
+  @Field(type => [String])
+  shoppingListIds: string[];
 
   @Field()
   deadline: DateTime;

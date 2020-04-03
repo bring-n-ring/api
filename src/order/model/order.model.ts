@@ -16,7 +16,7 @@ import { OrderStatus } from './order-status.enum';
   name: 'order',
 })
 export class Order extends BaseModel {
-  @Field()
+  @Field(type => OrderStatus)
   @field()
   status: OrderStatus;
 
@@ -34,12 +34,12 @@ export class Order extends BaseModel {
   })
   linger!: IDocumentRef<User>;
 
-  @Field(type => ShoppingList)
+  @Field(type => [ShoppingList])
   @documentRef({
-    name: 'shoppingList',
+    name: 'shoppingLists',
     entity: ShoppingList,
   })
-  shoppingList!: IDocumentRef<ShoppingList>;
+  shoppingLists!: IDocumentRef<ShoppingList>[];
 
   @Field()
   createdAt: DateTime;

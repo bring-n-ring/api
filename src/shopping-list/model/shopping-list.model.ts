@@ -1,13 +1,9 @@
-import { Field, Float, ObjectType } from '@nestjs/graphql';
-import {
-  documentRef,
-  field,
-  IDocumentRef,
-  rootCollection,
-} from 'firebase-firestorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { field, map, rootCollection } from 'firebase-firestorm';
 import { DateTime } from 'luxon';
+import { Budget } from '../../budget/model/budget.model';
 import { BaseModel } from '../../core/model/base.model';
-import { ShoppingListType } from '../../shopping-list-type/model/shopping-list-type.model';
+import { ShoppingListType } from './shopping-list-type.enum';
 
 @ObjectType()
 @rootCollection({
@@ -22,20 +18,13 @@ export class ShoppingList extends BaseModel {
   @field()
   note?: string;
 
-  @Field(type => Float)
-  @field()
-  minBudget: number;
-
-  @Field(type => Float)
-  @field()
-  maxBudget: number;
+  @Field()
+  @map({})
+  budget!: Budget;
 
   @Field(type => ShoppingListType)
-  @documentRef({
-    name: 'shoppingListType',
-    entity: ShoppingListType,
-  })
-  shoppingListType!: IDocumentRef<ShoppingListType>;
+  @field()
+  shoppingListType: ShoppingListType;
 
   @Field()
   createdAt: DateTime;
