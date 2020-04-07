@@ -1,6 +1,7 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { Address } from '../../../address/model/address.model';
+
 import { CreateAddressInput } from '../../../address/graphql/create-address-input';
+import { Address } from '../../../address/model/address.model';
 
 @InputType()
 export class CreateUserInput {
@@ -22,16 +23,15 @@ export class CreateUserInput {
   @Field({ nullable: true })
   image?: string;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   totalBringALings?: number;
 
-  @Field(type => [CreateAddressInput])
+  @Field((type) => [CreateAddressInput])
   addresses: Address[];
 
-  @Field(type => [String])
+  @Field((type) => [String])
   roleIDs: string[];
 
-  @Field(type => [String])
+  @Field((type) => [String])
   tagsIDs: string[];
-
 }

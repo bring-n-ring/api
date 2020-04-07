@@ -11,9 +11,9 @@ export class CreateAddressInput {
   @Field({ nullable: true })
   additionalInfo?: string;
 
-  @Field(type => Float, { nullable: true })
+  @Field((type) => Float, { nullable: true })
   latitude?: number;
 
-  @Field(type => Float, { nullable: true })
+  @Field((type) => Float, { nullable: true })
   longitude?: number;
 }

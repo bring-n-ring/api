@@ -6,7 +6,7 @@ export class CreateOrderInput {
   @Field()
   lingerId: string;
 
-  @Field(type => [String])
+  @Field((type) => [String])
   shoppingListIds: string[];
 
   @Field()

@@ -1,8 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { field, map, rootCollection } from 'firebase-firestorm';
 import { DateTime } from 'luxon';
+
 import { Budget } from '../../budget/model/budget.model';
 import { BaseModel } from '../../core/model/base.model';
+
 import { ShoppingListType } from './shopping-list-type.enum';
 
 @ObjectType()
@@ -22,7 +24,7 @@ export class ShoppingList extends BaseModel {
   @map({})
   budget!: Budget;
 
-  @Field(type => ShoppingListType)
+  @Field((type) => ShoppingListType)
   @field()
   shoppingListType: ShoppingListType;
 

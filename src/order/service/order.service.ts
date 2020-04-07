@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Collection } from 'firebase-firestorm';
+
 import {
   dateTimeToTimestamp,
   serverTimestamp,
@@ -22,7 +23,7 @@ export class OrderService {
 
   create(order: Order & CreateOrderInput): Promise<Order> {
     order.linger = Collection(User).doc(order.lingerId);
-    order.shoppingLists = order.shoppingListIds.map(id =>
+    order.shoppingLists = order.shoppingListIds.map((id) =>
       Collection(ShoppingList).doc(id),
     );
     order.createdAtTimestamp = serverTimestamp();
@@ -33,7 +34,7 @@ export class OrderService {
   update(order: Order & UpdateOrderInput): Promise<Order> {
     order.linger = Collection(User).doc(order.lingerId);
     order.bringer = Collection(User).doc(order.bringerId);
-    order.shoppingLists = order.shoppingListIds.map(id =>
+    order.shoppingLists = order.shoppingListIds.map((id) =>
       Collection(ShoppingList).doc(id),
     );
     order.updatedAtTimestamp = serverTimestamp();

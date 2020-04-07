@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { field, rootCollection } from 'firebase-firestorm';
+
 import { BaseModel } from '../../core/model/base.model';
 
 @ObjectType()

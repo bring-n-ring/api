@@ -7,8 +7,9 @@ import {
   IDocumentRef,
   documentRef,
 } from 'firebase-firestorm';
-import { BaseModel } from '../../core/model/base.model';
+
 import { Address } from '../../address/model/address.model';
+import { BaseModel } from '../../core/model/base.model';
 import { Role } from '../../role/model/role.model';
 import { Tag } from '../../tag/model/tag.model';
 
@@ -42,7 +43,7 @@ export class User extends BaseModel {
   @field()
   image?: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   @field()
   totalBringALings: number;
 
@@ -53,14 +54,14 @@ export class User extends BaseModel {
   })
   addresses: ICollection<Address>[];
 
-  @Field(type => [Role])
+  @Field((type) => [Role])
   @documentRef({
     name: 'roles',
     entity: Role,
   })
   roles!: IDocumentRef<Role>[];
 
-  @Field(type => [Tag])
+  @Field((type) => [Tag])
   @documentRef({
     name: 'tags',
     entity: Tag,

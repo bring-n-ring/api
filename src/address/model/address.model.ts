@@ -1,5 +1,6 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { field, rootCollection } from 'firebase-firestorm';
+
 import { BaseModel } from '../../core/model/base.model';
 
 @ObjectType()
@@ -19,11 +20,11 @@ export class Address extends BaseModel {
   @field()
   additionalInfo?: string;
 
-  @Field(type => Float, { nullable: true })
+  @Field((type) => Float, { nullable: true })
   @field()
   latitude?: number;
 
-  @Field(type => Float, { nullable: true })
+  @Field((type) => Float, { nullable: true })
   @field()
   longitude?: number;
 }

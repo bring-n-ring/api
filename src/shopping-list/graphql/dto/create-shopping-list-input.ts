@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+
 import { BudgetInput } from '../../../budget/graphql/dto/budget-input';
 import { ShoppingListType } from '../../model/shopping-list-type.enum';
 
@@ -13,6 +14,6 @@ export class CreateShoppingListInput {
   @Field()
   budget: BudgetInput;
 
-  @Field(type => ShoppingListType)
+  @Field((type) => ShoppingListType)
   shoppingListType: ShoppingListType;
 }

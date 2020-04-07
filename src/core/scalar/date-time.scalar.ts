@@ -2,7 +2,7 @@ import { CustomScalar, Scalar } from '@nestjs/graphql';
 import { Kind } from 'graphql';
 import { DateTime } from 'luxon';
 
-@Scalar('DateTime', type => DateTime)
+@Scalar('DateTime', (type) => DateTime)
 export class DateTimeScalar implements CustomScalar<string, DateTime> {
   description = 'Date custom scalar type';
 

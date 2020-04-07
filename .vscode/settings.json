@@ -1,0 +1,12 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.enable": true,
+  "jest.runAllTestsFirst": false,
+  "jest.autoEnable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+}

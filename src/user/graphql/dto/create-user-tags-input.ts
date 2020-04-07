@@ -1,10 +1,10 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateUserTagsInput {
   @Field()
   userID: string;
 
-  @Field(type => [String])
+  @Field((type) => [String])
   tagsIDs: string[];
 }
